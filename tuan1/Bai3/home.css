@@ -1,0 +1,14 @@
+#khung{
+         width: 80%;
+         height: 370px;
+         border: 1px solid black;
+         margin: 0 auto;   
+         padding: 20px;
+      }
+#k {
+         width: 900px;
+         height: 700px;
+         border: 1px solid black;
+         margin: 0 auto;   
+         padding: 20px;
+      }

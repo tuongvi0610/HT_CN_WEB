@@ -1,0 +1,10 @@
+#bai5b{
+    table{
+        border: 1px double rgba(171, 11, 165, 0.808);
+        border-collapse: collapse;
+    }
+    tr,th,td{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+}

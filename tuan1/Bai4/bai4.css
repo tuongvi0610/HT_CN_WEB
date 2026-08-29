@@ -1,0 +1,42 @@
+*{
+    margin: 0 auto;
+    box-sizing: border-box;
+ }
+/* #anh{
+    width: 548px;
+    height: 150px;
+} */
+#khung_home{
+    margin-top: 10px; 
+    width:900px;
+    border:1px solid black;
+    padding: 10px;
+    height: 380px;
+}
+p,h1,div,hr{
+    text-align: justify;
+    color: #000;
+    margin-bottom: 10px;
+}
+#khung_index{
+    margin-top: 10px; 
+    width:700px;
+    border:1px solid black;
+    padding: 10px;
+    height: 850px;
+}
+
+#khung_member{
+    margin-top: 10px; 
+    width:700px;
+    border:1px solid black;
+    padding: 10px;
+    height: 920px;
+}
+#khung_class{
+    margin-top: 10px; 
+    width:700px;
+    border:1px solid black;
+    padding: 10px;
+    height: 910px;
+}

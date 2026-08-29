@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example Cafe Menu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background-color: #f0f0f0; /* Nền xám nhạt ngoài web */
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* === HEADER === */
+        header {
+            text-align: center;
+            padding: 25px 0;
+            background-color: #fff;
+        }
+
+        header h1 {
+            color: #d86565;
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* === THANH ĐIỀU HƯỚNG (NAV) === */
+        nav {
+            background-color: #e08989;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .menu-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .menu-links li {
+            border-right: 1px solid #fff;
+        }
+
+        .menu-links li:first-child {
+            border-left: 1px solid #fff;
+        }
+
+        .menu-links a {
+            display: block;
+            padding: 10px 25px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .menu-links a:hover {
+            background-color: #d86565;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box input {
+            padding: 4px;
+            border: none;
+            outline: none;
+        }
+
+        .search-box button {
+            padding: 4px 10px;
+            border: none;
+            background-color: #f4f4f4;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* === BỐ CỤC CHÍNH (3 CỘT) === */
+        .main-wrapper {
+            display: flex;
+            align-items: stretch; 
+        }
+
+        /* --- 1. CỘT TRÁI (LEFT SIDEBAR) --- */
+        .left-sidebar {
+            width: 20%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .left-sidebar a.btn {
+            display: block;
+            background-color: #e08989;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 14px;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .left-sidebar a.btn:hover {
+            background-color: #d86565;
+        }
+
+        .circle-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid #e08989;
+            margin: 20px auto 0;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* --- 2. CỘT GIỮA (NỘI DUNG CHÍNH) --- */
+        .center-content {
+            width: 55%;
+            padding: 15px 25px;
+        }
+
+        .section-title {
+            background-color: #e08989;
+            color: #fff;
+            text-align: center;
+            padding: 6px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            font-size: 16px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+        }
+
+        .menu-list {
+            list-style-type: square;
+            margin-left: 25px;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .v-tag {
+            color: red;
+            font-weight: bold;
+        }
+
+        .highlight-item {
+            color: red;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .back-top {
+            display: inline-block;
+            color: red;
+            font-weight: bold;
+            font-size: 12px;
+            text-decoration: underline;
+            margin: 10px 0 20px 0;
+        }
+
+        /* Bố cục Form (Sử dụng Grid) */
+        .info-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .info-form input, .info-form select, .info-form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 13px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .info-form textarea {
+            height: 70px;
+            resize: none;
+        }
+
+        .form-buttons {
+            grid-column: span 2;
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-buttons button {
+            padding: 5px 20px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        /* --- 3. CỘT PHẢI (SỰ KIỆN - EVENTS) --- */
+        .right-sidebar {
+            width: 25%;
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .right-sidebar h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .event-item {
+            margin-bottom: 25px;
+        }
+
+        .event-item h4 {
+            color: #87CEEB; /* Màu xanh biển nhạt */
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .event-img {
+            width: 100%;       
+            height: 130px;     
+            object-fit: cover; 
+            display: block;
+            margin-bottom: 8px;
+            border: 1px solid #333;
+        }
+
+        .event-item p {
+            font-size: 12px;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
+        .event-item a.read-more {
+            color: red;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: #e08989;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-style: italic;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <header>
+        <h1>EXAMPLE CAFE MENU</h1>
+    </header>
+
+    <!-- Navbar -->
+    <nav>
+        <ul class="menu-links">
+            <li><a href="#">🏠</a></li>
+            <li><a href="#">STARTER</a></li>
+            <li><a href="#">MAIN COURSES</a></li>
+            <li><a href="#">DESSERTS</a></li>
+        </ul>
+        <div class="search-box">
+            <input type="text" placeholder="">
+            <button>Go</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="main-wrapper">
+        
+        <!-- Left Sidebar -->
+        <div class="left-sidebar">
+            <a href="#" class="btn">Cafe Menu</a>
+            <a href="#" class="btn">Franchises</a>
+            <a href="#" class="btn">Promo Offers</a>
+            <a href="#" class="btn">Seasonal Info</a>
+            <a href="#" class="btn">Order Online</a>
+            <img src="" alt="Cafe Logo" class="circle-img">
+        </div>
+
+        <!-- Center Content -->
+        <div class="center-content">
+            <!-- Mục Starter -->
+            <h2 class="section-title">S t a r t e r</h2>
+            <ul class="menu-list">
+                <li>Chestnut and Mushroom Goujons <span class="v-tag">(v)</span></li>
+                <li>Goat Cheese <span class="v-tag">(v)</span></li>
+                <li class="highlight-item">HONEY SOY CHICKEN KEBABS <span class="v-tag">(v)</span></li>
+                <li>Seafood Salad <span class="v-tag">(v)</span></li>
+            </ul>
+            <a href="#" class="back-top">Back to Top</a>
+
+            <!-- Mục Desserts -->
+            <h2 class="section-title">D e s s e r t s</h2>
+            <ul class="menu-list">
+                <li>Lemon Sorbet <span class="v-tag">(v)</span></li>
+                <li>Chocolate Mud Pie <span class="v-tag">(v)</span></li>
+                <li>Pecan Pie <span class="v-tag">(v)</span></li>
+                <li>Selection of fine Cheeses from Around the World <span class="v-tag">(v)</span></li>
+            </ul>
+            <a href="#" class="back-top">Back to Top</a>
+
+            <!-- Mục Form Thông tin -->
+            <h2 class="section-title">I N F O R M A T I O N</h2>
+            <form class="info-form">
+                <input type="text" placeholder="First Name">
+                <input type="text" placeholder="Last Name">
+                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Telephone">
+                <select>
+                    <option>Date</option>
+                </select>
+                <input type="time" placeholder="--:-- --">
+                <input type="number" class="full-width" placeholder="Guest Count">
+                <textarea class="full-width" placeholder="Your Comments Here..."></textarea>
+                <div class="form-buttons">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right Sidebar (Events) -->
+        <div class="right-sidebar">
+            <h3>Events</h3>
+            
+            <div class="event-item">
+                <h4>Regular Meetings</h4>
+                <img src="meeting.png" alt="Meetings" class="event-img">
+                <p>Host your regular team meetings with us to mix the normal office environment. <a href="#" class="read-more">Read more...</a></p>
+            </div>
+
+            <div class="event-item">
+                <h4>Product Launches</h4>
+                <img src="" alt="Product Launches" class="event-img">
+                <p>Launch your product with some style that clearly hits the target. <a href="#" class="read-more">Read more...</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>ABC Company© - 12345678 - abccoffee@gmail.com</p>
+    </footer>
+</div>
+
+</body>
+</html>
